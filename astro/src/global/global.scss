@@ -124,6 +124,7 @@ body {
   -webkit-tap-highlight-color: transparent;
   background: var(--primary-200, #fffdfd);
   color: var(--secondary-500, #726378);
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(1rem, calc(18vw / 7.68), calc(18rem / 16));
   line-height: 175%;
 }
