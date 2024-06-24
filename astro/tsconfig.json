@@ -9,6 +9,7 @@
       "@/utils/*": ["./src/utils/*"],
       "@/assets/*": ["./src/assets/*"],
       "@/public/*": ["./public/*"],
-    }
+    },
+    "types": ["astro/client"]
   }
 }
