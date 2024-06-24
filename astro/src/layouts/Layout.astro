@@ -1,51 +1,104 @@
 ---
-interface Props {
-	title: string;
-}
+import { getImage } from 'astro:assets';
+import { LOCALE, THEME_COLOR } from '../global/constants';
+import favicon from '@/assets/favicon.png';
+import faviconSvg from '@/assets/favicon.svg';
 
-const { title } = Astro.props;
+type Props = {
+  url: string;
+  title: string;
+  description: string;
+  image: {
+    url: string;
+    width?: number;
+    height?: number;
+  };
+};
+
+const { url, title, description, image } = Astro.props;
+
+const appleTouchIcon = await getImage({
+  src: favicon,
+  width: 180,
+  height: 180,
+  format: 'png',
+});
+const icon = await getImage({ src: faviconSvg, format: 'svg' });
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang={LOCALE}>
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href={icon.src} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={appleTouchIcon.src} />
+    <meta name="theme-color" content={THEME_COLOR} />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="canonical" href={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content={title} />
+    <meta property="og:locale" content={LOCALE} />
+    <meta property="og:image" content={image.url} />
+    <meta
+      property="og:image:width"
+      content={image.width?.toString() || '1200'}
+    />
+    <meta
+      property="og:image:height"
+      content={image.height?.toString() || '630'}
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image.url} />
+    <meta
+      name="twitter:image:width"
+      content={image.width?.toString() || '1200'}
+    />
+    <meta
+      name="twitter:image:height"
+      content={image.height?.toString() || '630'}
+    />
+    <link rel="sitemap" href="/sitemap.xml" />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
+
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+  }
+  html {
+    font-family: system-ui, sans-serif;
+    background: #13151a;
+    background-size: 224px;
+  }
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+  }
 </style>
