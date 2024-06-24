@@ -5,7 +5,7 @@ const content = [
   'User-Agent: *',
   'Allow: /',
   '',
-  `Sitemap: ${DOMAIN}/sitemap.xml`
+  `Sitemap: ${DOMAIN}/sitemap-index.xml`
 ].join('\n');
 
 export const GET: APIRoute = async () => {
