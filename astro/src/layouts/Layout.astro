@@ -1,4 +1,5 @@
 ---
+import '@/global/global.scss';
 import { getImage } from 'astro:assets';
 import { LOCALE, THEME_COLOR } from '../global/constants';
 import favicon from '@/assets/favicon.png';
@@ -39,9 +40,9 @@ const icon = await getImage({ src: faviconSvg, format: 'svg' });
     <meta name="theme-color" content={THEME_COLOR} />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="canonical" href={url} />
+    <meta property="og:url" content={url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={url} />
     <meta property="og:site_name" content={title} />
     <meta property="og:locale" content={LOCALE} />
     <meta property="og:image" content={image.url} />
@@ -69,36 +70,8 @@ const icon = await getImage({ src: faviconSvg, format: 'svg' });
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
-    <slot />
+    <main id="main">
+      <slot />
+    </main>
   </body>
 </html>
-
-<style is:global>
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-  }
-  html {
-    font-family: system-ui, sans-serif;
-    background: #13151a;
-    background-size: 224px;
-  }
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
-  }
-</style>
