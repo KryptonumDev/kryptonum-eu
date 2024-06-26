@@ -1,18 +1,17 @@
 import { defineConfig } from 'astro/config';
+import vercel from "@astrojs/vercel/serverless";
 import sitemap from "@astrojs/sitemap";
 import { DOMAIN } from './src/global/constants';
 
 export default defineConfig({
   site: DOMAIN,
-  integrations: [
-    sitemap(),
-  ],
+  integrations: [sitemap()],
   image: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-      },
-    ],
-  }
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: 'cdn.sanity.io'
+    }]
+  },
+  output: "server",
+  adapter: vercel()
 });
