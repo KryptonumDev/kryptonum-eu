@@ -1,22 +1,10 @@
 ---
-import sanityFetch from '@/utils/sanity.fetch';
 import Layout from '../layouts/Layout.astro';
+import metadataFetch from '@/utils/metadata.fetch';
 
-type QueryProps = {
-  title: string;
-  description: string;
-};
-
-const seo = await sanityFetch<QueryProps>({
-  query: /* groq */ `
-    *[_type == "Index_Page"][0].seo {
-      title,
-      description,
-    }
-  `,
-});
+const metadata = await metadataFetch('Index_Page');
 ---
 
-<Layout {...seo} path="/">
-  <p>{seo.title}</p>
+<Layout {...metadata} path="/">
+  <p>Hej</p>
 </Layout>
