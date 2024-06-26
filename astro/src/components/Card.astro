@@ -7,10 +7,11 @@ type Props = {
 const { title, paragraph } = Astro.props;
 ---
 
-<div>
+<section is="card-item">
   <h2>{title}</h2>
   <p>{paragraph}</p>
-</div>
+  <button aria-label="Heart">💜</button> × <span>0</span>
+</section>
 
 <style>
   div {
@@ -20,9 +21,24 @@ const { title, paragraph } = Astro.props;
 </style>
 
 <script>
-  document.querySelectorAll('div').forEach((el) => {
-    el.addEventListener('click', () => {
-      el.style.backgroundColor = 'var(--neutral-300)';
-    });
-  });
+  customElements.define(
+    'card-item',
+    class extends HTMLElement {
+      button: HTMLButtonElement;
+      span: HTMLSpanElement;
+      constructor() {
+        super();
+        let count = 0;
+        this.button = this.querySelector('button')!;
+        this.span = this.querySelector('span')!;
+        this.button.addEventListener('click', () => {
+          count++;
+          this.span.textContent = count.toString();
+        });
+      }
+    },
+    {
+      extends: 'section',
+    }
+  );
 </script>

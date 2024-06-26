@@ -4,5 +4,15 @@ import { DOMAIN } from './src/global/constants';
 
 export default defineConfig({
   site: DOMAIN,
-  integrations: [sitemap()]
+  integrations: [
+    sitemap(),
+  ],
+  image: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
+    ],
+  }
 });

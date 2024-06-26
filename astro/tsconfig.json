@@ -8,8 +8,7 @@
       "@/components/*": ["./src/components/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/assets/*": ["./src/assets/*"],
-      "@/public/*": ["./public/*"],
-    },
-    "types": ["astro/client"]
-  }
+      "@/public/*": ["./public/*"]
+    }
+  },
 }
