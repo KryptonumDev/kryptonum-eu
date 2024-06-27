@@ -10,10 +10,7 @@ export const onRequest: MiddlewareHandler = async (req, next) => {
   const key = req.url.pathname;
   console.log('[Middleware] onRequest', key);
 
-  let ttl: undefined | number;
-  req.locals.cache = (seconds: number = 60) => {
-    ttl = seconds;
-  };
+  let ttl: undefined | number = 60;
 
   if (shouldSkipCache(req)) return next();
   const cachedResponse = isr.get(key);
