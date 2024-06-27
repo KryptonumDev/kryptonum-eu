@@ -1,14 +1,14 @@
-import type { MiddlewareHandler } from "astro";
+import { defineMiddleware } from "astro/middleware";
 import { isr } from "@/utils/isr";
 
-export const onRequest: MiddlewareHandler = async (req, next) => {
-  const key = req.url.pathname;
+export const onRequest = defineMiddleware(async (context, next) => {
+  const key = context.url.pathname;
   console.log("[Middleware] onRequest", key);
 
   let ttl: undefined | number;
-  req.locals.cache = (seconds: number = 60) => (ttl = seconds);
+  context.locals.cache = (seconds: number = 60) => (ttl = seconds);
 
-  if (req.request.method !== "GET") return next();
+  if (context.request.method !== "GET") return next();
 
   const cachedResponse = isr.get(key);
   if (cachedResponse) return cachedResponse;
@@ -17,4 +17,4 @@ export const onRequest: MiddlewareHandler = async (req, next) => {
   if (ttl !== undefined) isr.set(key, response, ttl);
 
   return response;
-};
+});
