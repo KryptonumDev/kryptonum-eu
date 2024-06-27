@@ -15,6 +15,5 @@ export default defineConfig({
   output: "server",
   adapter: vercel({
     edgeMiddleware: true,
-    isr: true,
   })
 });
