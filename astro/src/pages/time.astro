@@ -1,6 +1,7 @@
 ---
 import { invalidate } from '@/utils/isr';
 const currentTime = new Date().toLocaleTimeString();
+Astro.locals.cache = () => 50;
 
 if (Astro.request.method === 'POST') {
   invalidate('/time');

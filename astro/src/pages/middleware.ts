@@ -1,18 +1,15 @@
-import type { APIContext, MiddlewareHandler } from 'astro';
-import { isr } from '@/utils/isr';
-
-const shouldSkipCache = (req: APIContext) => {
-  if (req.request.method !== 'GET') return true;
-  return false;
-};
+import type { MiddlewareHandler } from "astro";
+import { isr } from "@/utils/isr";
 
 export const onRequest: MiddlewareHandler = async (req, next) => {
   const key = req.url.pathname;
-  console.log('[Middleware] onRequest', key);
+  console.log("[Middleware] onRequest", key);
 
-  let ttl: undefined | number = 60;
+  let ttl: undefined | number;
+  req.locals.cache = (seconds: number = 60) => (ttl = seconds);
 
-  if (shouldSkipCache(req)) return next();
+  if (req.request.method !== "GET") return next();
+
   const cachedResponse = isr.get(key);
   if (cachedResponse) return cachedResponse;
 
