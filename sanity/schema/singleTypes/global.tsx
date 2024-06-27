@@ -205,9 +205,9 @@ export default defineType({
       title: 'SEO',
       fields: [
         defineField({
-          name: 'og_Img',
+          name: 'OpenGraphImage',
           type: 'image',
-          title: 'OG Image',
+          title: 'Open Graph Image',
           description:
             'Zdjęcie, które jest widoczne przy udostępnianiu strony w mediach społecznościowych. Wymiary zdjęcia powinny mieć 1200x630px',
         }),

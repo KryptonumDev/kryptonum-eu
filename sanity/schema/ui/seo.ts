@@ -33,7 +33,7 @@ export default defineType({
       name: 'img',
       type: 'image',
       title: 'Social Share Image (opcjonalne)',
-      description: 'Social Share Image to zdjęcie, które pojawia się np. podczas udostępniania linku w mediach społecznościowych. ',
+      description: 'Social Share Image to zdjęcie, które pojawia się np. podczas udostępniania linku w mediach społecznościowych. Zdjęcie powinno być w formacie PNG lub JPG.',
     }),
   ],
 });

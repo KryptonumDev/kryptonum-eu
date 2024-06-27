@@ -19,4 +19,9 @@ export default defineType({
       title: 'SEO',
     },
   ],
+  preview: {
+    prepare: () => ({
+      title: 'Strona główna',
+    }),
+  }
 });
