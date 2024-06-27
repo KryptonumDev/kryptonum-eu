@@ -13,5 +13,9 @@ export default defineConfig({
     }]
   },
   output: "server",
-  adapter: vercel()
+  adapter: vercel({
+    isr: {
+      bypassToken: "005556d774a8",
+    }
+  })
 });
