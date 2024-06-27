@@ -1,0 +1,21 @@
+---
+import { invalidate } from '@/utils/isr';
+// Astro.locals.cache(60);
+const currentTime = new Date().toLocaleTimeString();
+
+if (Astro.request.method === 'POST') {
+  invalidate('/time');
+}
+---
+
+<html>
+  <head>
+    <title>Current Time</title>
+  </head>
+  <body>
+    <h1>The current time is: {currentTime}</h1>
+    <form method="post">
+      <button type="submit">Invalidate</button>
+    </form>
+  </body>
+</html>

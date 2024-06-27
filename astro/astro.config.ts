@@ -14,8 +14,6 @@ export default defineConfig({
   },
   output: "server",
   adapter: vercel({
-    isr: {
-      bypassToken: "005556d774a8005556d774a8005556d7",
-    }
+    edgeMiddleware: true,
   })
 });
