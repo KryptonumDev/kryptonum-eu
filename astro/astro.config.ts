@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import vercel from "@astrojs/vercel/serverless";
 import sitemap from "@astrojs/sitemap";
 import { DOMAIN } from './src/global/constants';
+import { isPreviewDeployment } from '@/utils/is-preview-deployment';
 
 export default defineConfig({
   site: DOMAIN,
@@ -14,8 +15,10 @@ export default defineConfig({
   },
   output: "server",
   adapter: vercel({
-    isr: {
-      bypassToken: process.env.ISR_BYPASS_TOKEN
+    ...!isPreviewDeployment && {
+      isr: {
+        bypassToken: process.env.ISR_BYPASS_TOKEN
+      }
     }
   })
 });
