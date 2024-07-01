@@ -14,6 +14,8 @@ export default defineConfig({
   },
   output: "server",
   adapter: vercel({
-    isr: true,
+    isr: {
+      bypassToken: process.env.ISR_BYPASS_TOKEN
+    }
   })
 });
