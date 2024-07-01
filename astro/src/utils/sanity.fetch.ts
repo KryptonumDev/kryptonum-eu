@@ -1,7 +1,7 @@
 import { createClient } from '@sanity/client';
 import type { QueryParams } from 'sanity'
 
-const isPreviewDeployment = process.env.NODE_ENV !== 'production';
+const isPreviewDeployment = process.env.VERCEL_ENV === 'preview' || process.env.NODE_ENV !== 'production';
 
 const projectId = '672hifzl';
 const token = import.meta.env.SANITY_API_TOKEN;
