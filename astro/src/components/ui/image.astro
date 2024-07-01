@@ -1,0 +1,45 @@
+---
+import { Picture } from 'astro:assets';
+
+export type ImageDataTypes = {
+  asset: {
+    url: string;
+    altText: string;
+    metadata: {
+      dimensions: {
+        width: number;
+        height: number;
+      };
+      lqip: string;
+    };
+  };
+};
+
+export const ImgDataQuery = `
+  asset -> {
+    url,
+    altText,
+    metadata {
+      dimensions {
+        width,
+        height,
+      },
+      lqip,
+    },
+  },
+`;
+
+const { data } = Astro.props as { data: ImageDataTypes };
+---
+
+<Picture
+  src={data.asset.url}
+  alt={data.asset.altText || ''}
+  width={data.asset.metadata.dimensions.width}
+  height={data.asset.metadata.dimensions.height}
+  formats={['avif', 'webp']}
+  fallbackFormat="png"
+  style={{
+    background: `url(${data.asset.metadata.lqip}) center / cover no-repeat`,
+  }}
+/>

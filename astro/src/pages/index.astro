@@ -1,11 +1,28 @@
 ---
+import sanityFetch from '@/utils/sanity.fetch';
 import Layout from '../layouts/Layout.astro';
 import metadataFetch from '@/utils/metadata.fetch';
+import Image, {
+  ImgDataQuery,
+  type ImageDataTypes,
+} from '@/components/ui/image.astro';
 
 const metadata = await metadataFetch('Index_Page');
+
+const data = await sanityFetch<{ img: ImageDataTypes }>({
+  query: `
+    *[_type == "Index_Page"][0] {
+      img {
+        ${ImgDataQuery}
+      }
+    }
+  `,
+});
+
+console.log(data);
 ---
 
 <Layout {...metadata} path="/">
   <p>Kryptonum</p>
-  <a href="/time">Go to <i>/time</i></a>
+  <Image data={data.img} />
 </Layout>
