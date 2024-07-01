@@ -1,3 +1,5 @@
+export const prerender = true;
+
 import type { APIRoute } from 'astro';
 import path from 'node:path'
 import sharp from 'sharp';
