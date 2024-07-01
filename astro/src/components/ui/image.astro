@@ -37,15 +37,19 @@ type Props = {
 const { data, ...props } = Astro.props;
 ---
 
-<Picture
-  {...props}
-  src={data.asset.url}
-  alt={data.asset.altText || ''}
-  width={data.asset.metadata.dimensions.width}
-  height={data.asset.metadata.dimensions.height}
-  formats={['avif', 'webp']}
-  fallbackFormat="png"
-  style={{
-    background: `url(${data.asset.metadata.lqip}) center / cover no-repeat`,
-  }}
-/>
+{
+  data?.asset && (
+    <Picture
+      {...props}
+      src={data.asset.url}
+      alt={data.asset.altText || ''}
+      width={data.asset.metadata.dimensions.width}
+      height={data.asset.metadata.dimensions.height}
+      formats={['avif', 'webp']}
+      fallbackFormat="png"
+      style={{
+        background: `url(${data.asset.metadata.lqip}) center / cover no-repeat`,
+      }}
+    />
+  )
+}
