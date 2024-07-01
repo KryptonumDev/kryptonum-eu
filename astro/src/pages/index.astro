@@ -2,19 +2,14 @@
 import sanityFetch from '@/utils/sanity.fetch';
 import Layout from '../layouts/Layout.astro';
 import metadataFetch from '@/utils/metadata.fetch';
-import Image, {
-  ImgDataQuery,
-  type ImageDataTypes,
-} from '@/components/ui/image.astro';
+import Markdown from '@/components/ui/markdown.astro';
 
 const metadata = await metadataFetch('Index_Page');
 
-const { img } = await sanityFetch<{ img: ImageDataTypes }>({
+const { title } = await sanityFetch<{ title: string }>({
   query: `
     *[_type == "Index_Page"][0] {
-      img {
-        ${ImgDataQuery}
-      }
+      title,
     }
   `,
 });
@@ -22,5 +17,5 @@ const { img } = await sanityFetch<{ img: ImageDataTypes }>({
 
 <Layout {...metadata} path="/">
   <p>Kryptonum</p>
-  <Image data={img} />
+  <Markdown>{title}</Markdown>
 </Layout>
