@@ -9,7 +9,7 @@ import Image, {
 
 const metadata = await metadataFetch('Index_Page');
 
-const data = await sanityFetch<{ img: ImageDataTypes }>({
+const { img } = await sanityFetch<{ img: ImageDataTypes }>({
   query: `
     *[_type == "Index_Page"][0] {
       img {
@@ -18,11 +18,9 @@ const data = await sanityFetch<{ img: ImageDataTypes }>({
     }
   `,
 });
-
-console.log(data);
 ---
 
 <Layout {...metadata} path="/">
   <p>Kryptonum</p>
-  <Image data={data.img} />
+  <Image data={img} />
 </Layout>
