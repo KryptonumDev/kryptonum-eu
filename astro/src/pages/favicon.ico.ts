@@ -6,7 +6,7 @@ import ico from 'sharp-ico';
 const icon = path.resolve('src/assets/favicon.png');
 
 export const GET: APIRoute = async () => {
-  const buffer = await sharp(icon).resize(32).toFormat('png').toBuffer();
+  const buffer = await sharp(icon).resize(32).toBuffer();
   const icoBuffer = ico.encode([buffer]);
 
   return new Response(icoBuffer, {
